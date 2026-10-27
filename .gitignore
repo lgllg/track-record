@@ -1,0 +1,3 @@
+*.tsq
+*.ots.bak
+__pycache__/
