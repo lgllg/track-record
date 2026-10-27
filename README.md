@@ -16,9 +16,13 @@ tsa-certs/                 FreeTSA root CA (others: system CA store)
 ```
 pip install py_ecc
 python3 verify.py              # chain, signatures, Rekor proofs, timestamps, deadlines, reveals
-python3 verify.py --days 3     # + scan Rekor for any other entry signed with the ledger key
+python3 verify.py --days 3     # + Rekor scan, last 3 trading days (~60 MB download)
+python3 verify.py --months 3   # + Rekor scan, last 3 months (~1.3 GB download, asks first)
 pip install opentimestamps-client
 python3 verify.py --ots        # + Bitcoin anchors
 ```
+
+The Rekor scan checks the independent public log (Sigstore Rekor) for any other entry signed with
+the ledger key in each day's window, i.e. that no second, unpublished pick was ever made.
 
 Git commit metadata is not evidence; the signatures, Rekor proofs and timestamp tokens are.
