@@ -1,0 +1,9 @@
+log2025-1.rekor.sigstore.dev
+183673952
+pLh9jGXB8l/CWGF7Xs9/2u2306cBz4RXCtRPD8zdkyQ=
+
+— log2025-1.rekor.sigstore.dev zxGZFahR0DC6FlmmDbLqCrNzavP0Mbwz0rRZxY5rRXf2Vr3kr7D6kgMVMWzbFBPsJVZxJGyXmrQ+C0j0b/HWP0jcQAE=
+— witness.navigli.sunlight.geomys.org o+AP4gAAAABq6z8UYlVCwxiyKoALPuiZ72gTTA1TpESTaSvZuujrYMaoJ/0ku/QT4z5mfjSjTmf7YCUsEG2DA2oK2Px9QvSzrXngDQ==
+— witness.stagemole.eu Z/euoAAAAABq6z8U5QwSorVRaaNMwHZnMiz3K3n+drEgtpFEAmwPdbyKxQsaCkpS5NroJLyBN7/G/H2ixDKOOSR75iEgBNGSgRw4Dg==
+— staging.witness.transparency.goog/ring-any-bells LhqNyQAAAABq6z8UKBLOIZ5iF6hI8UkxSMFyZYb2frRQKsIen278qs8g/cn01UtCJftSF8K3kBnSpdY1sXvyDwrFpbqGkJlg97zeDw==
+— krabbel.ct.ipng.ch SxDb2AAAAABq6z8UeGWOkEle8Hhi1Dr3hvUJSorYnFQCftNZmMMiyRsQT5MGsZiZ8i4aOY1mdKnSGhzsKUufpa+/Z7luUDaX1ZN8BA==
