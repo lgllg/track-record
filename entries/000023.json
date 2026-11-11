@@ -1,0 +1,1 @@
+{"drand":{"round":33868023,"signature":"a09aed7673c73fa4c668250ed2ad78fad67a44c31079c3cab86f7c9fac6bf58df993acbe79ce038cd0f3672fa5b6e0e6"},"late":true,"prev":"b4cfedec0dac4e47eb885287459731ac657f9bb479703cce37e2f59303e749f3","reason":"missed window (recorded late)","recorded_at":"2026-11-11T14:30:36.886Z","seq":23,"trading_date":"2026-11-11","type":"pass"}
