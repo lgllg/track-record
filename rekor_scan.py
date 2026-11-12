@@ -44,6 +44,7 @@ LOGS = {
     "log2025-1.rekor.sigstore.dev": "MCowBQYDK2VwAyEAt8rlp1knGwjfbcXAYPYAkn0XiLz1x8O4t0YkEhie244=",
     "log2025-alpha3.rekor.sigstage.dev": "MCowBQYDK2VwAyEAlD3dVc8yaP25mPtT/sJ59D3LLxGBgW/qYrM6x6KmOqk=",
 }
+READ_PREFIXES = ("api/v2/", "")   # where a log serves its checkpoint and tiles, tried in order
 TILE = 256
 BYTES_PER_ENTRY = 1410        # measured 2026-10-26 on log2025-1
 WARN_BYTES = 300 * 1024**2    # ask before downloading more than this
@@ -62,11 +63,35 @@ class Log:
         self.cache = Path(cache) if cache else None
         self.downloaded = 0
         self.tiles = {}
+        self.prefix = None            # read prefix, found on first use (see READ_PREFIXES)
+
+    def read_prefix(self):
+        if self.prefix is None:
+            for p in READ_PREFIXES:
+                try:
+                    self.fetch(p + "checkpoint")
+                    self.prefix = p
+                    break
+                except urllib.error.HTTPError as e:
+                    if e.code != 404:
+                        raise
+            else:
+                raise ValueError(f"{self.origin}: no checkpoint under any known path "
+                                 f"({', '.join('/' + p + 'checkpoint' for p in READ_PREFIXES)})")
+        return self.prefix
 
     def get(self, path):
         cached = self.cache / self.origin / path if self.cache and ".p/" not in path else None
         if cached and cached.exists():
             return cached.read_bytes()
+        data = self.fetch(self.read_prefix() + path)
+        if cached:
+            cached.parent.mkdir(parents=True, exist_ok=True)
+            cached.write_bytes(data)
+        return data
+
+    def fetch(self, path):
+        """GET url/path with retries on transient errors (404 and other client errors raise at once)."""
         for attempt in range(5):
             try:
                 req = urllib.request.Request(self.url + "/" + path, headers={"User-Agent": USER_AGENT})
@@ -81,9 +106,6 @@ class Log:
                     raise
             time.sleep(2 ** attempt)
         self.downloaded += len(data)
-        if cached:
-            cached.parent.mkdir(parents=True, exist_ok=True)
-            cached.write_bytes(data)
         return data
 
     def checkpoint(self):
